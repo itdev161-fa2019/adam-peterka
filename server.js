@@ -1,7 +1,11 @@
 import express from 'express';
+import connectDatabase from './config/db';
 
 //initialize express application
 const app = express();
+
+//connect database
+connectDatabase();
 
 //API endpoints
 app.get('/', (req, res) =>
@@ -9,4 +13,4 @@ app.get('/', (req, res) =>
 );
 
 //connection listener
-app.listen(9000, () => console.log('Express server running on port 3000'));
+app.listen(3000, () => console.log('Express server running on port 3000'));

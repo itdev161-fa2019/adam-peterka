@@ -13,7 +13,7 @@ const connectDatabase = async () => {
     console.log('Connected to MOngoDB');
   } catch (error) {
     console.error(error.message);
-    console.log('uhoh');
+
     //exit with failure code
     process.exit(1);
   }
