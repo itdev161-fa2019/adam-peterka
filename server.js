@@ -2,7 +2,7 @@ import express from 'express';
 import connectDatabase from './config/db';
 import { check, validationResult } from 'express-validator';
 import cors from 'cors';
-import bcyrpt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import User from './models/User';
 
 //initialize express application
@@ -35,6 +35,7 @@ app.get('/', (req, res) =>
 app.post(
   '/api/users',
   [
+    //express validator uses functions to check data
     check('name', 'Please enter your name')
       .not()
       .isEmpty(),
@@ -67,8 +68,8 @@ app.post(
         });
 
         //Encrpyt the password
-        const salt = await bcyrpt.genSalt(10);
-        user.password = await bcyrpt.hash(password, salt);
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(password, salt);
 
         //Save to the db and return
         await user.save();
