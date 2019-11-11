@@ -4,8 +4,8 @@ import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 
-import Register from './components/Register/Register';
-import Login from './components/Login/Login';
+import Register from './components/Register/Register.js';
+import Login from './components/Login/Login.js';
 
 class App extends React.Component {
   state = {
@@ -52,7 +52,7 @@ class App extends React.Component {
         .catch(error => {
           localStorage.removeItem('user');
           this.setState({ user: null });
-          console.error(`Error logging in: ${error}`);
+          console.error(`Error Logging in: ${error}`);
         });
     }
   };
@@ -100,7 +100,7 @@ class App extends React.Component {
                   <div>{data}</div>
                 </React.Fragment>
               ) : (
-                <React.Fragment>Please Register or Login</React.Fragment>
+                <React.Fragment>Please Register or login</React.Fragment>
               )}
             </Route>
             <Switch>
