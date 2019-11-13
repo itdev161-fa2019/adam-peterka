@@ -104,10 +104,10 @@ const Register = ({ authenticateUser }) => {
         />
       </div>
       <div>
-        <button onClick={() => register()}>Register</button>
+        <button onClick={() => registerUser()}>Register</button>
       </div>
       <div>
-        {errors && errors.map(error => <div key={error.msp}>{error.msg}</div>)}
+        {errors && errors.map(error => <div key={error.msg}>{error.msg}</div>)}
       </div>
     </div>
   );
