@@ -208,6 +208,21 @@ app.post(
   }
 );
 
+/**
+ * @route GET api/posts
+ * @desc GET posts
+ */
+app.get("/api/posts", auth, async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ data: -1 });
+
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+});
+
 //connection listener
 const port = 5000;
 app.listen(port, () => console.log(`Express server running on port ${port}`));

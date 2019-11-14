@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const PortSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
   user: {
     type: "ObjectId",
     ref: "User"
