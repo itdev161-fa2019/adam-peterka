@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import "./styles.css";
 
-const CreatePost = ({ onPostCreated }) => {
+const CreatePost = ({ token, onPostCreated }) => {
   let history = useHistory();
   const [postData, setPostData] = useState({
     title: "",
@@ -37,7 +37,7 @@ const CreatePost = ({ onPostCreated }) => {
           }
         };
 
-        //Create the post
+        // Create the past
         const body = JSON.stringify(newPost);
         const res = await axios.post(
           "http://localhost:5000/api/posts",
@@ -45,7 +45,7 @@ const CreatePost = ({ onPostCreated }) => {
           config
         );
 
-        // call the handler and redirect
+        // Call the handler and redirect
         onPostCreated(res.data);
         history.push("/");
       } catch (error) {
@@ -67,7 +67,7 @@ const CreatePost = ({ onPostCreated }) => {
       <textarea
         name="body"
         cols="30"
-        row="10"
+        rows="10"
         value={body}
         onChange={e => onChange(e)}
       ></textarea>
