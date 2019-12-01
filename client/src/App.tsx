@@ -101,8 +101,9 @@ class App extends React.Component {
       };
 
       axios
-        .delete(`http://localhost:5000/api/post/${post._id}`, config)
+        .delete(`http://localhost:5000/api/posts/${post._id}`, config)
         .then(response => {
+          // eslint-disable-next-line
           const newPosts = this.state.posts.filter(p => post._id !== post._id);
           this.setState({
             posts: [...newPosts]
