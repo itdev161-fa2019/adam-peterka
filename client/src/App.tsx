@@ -1,15 +1,16 @@
 import React from "react";
 import axios from "axios";
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
+import PostList from "./components/PostList/PostList";
+import Post from "./components/Post/Post";
 
 class App extends React.Component {
   state = {
     posts: [],
+    post: null,
     token: null,
     user: null
   };
@@ -82,8 +83,15 @@ class App extends React.Component {
     this.setState({ user: null, token: null });
   };
 
+  viewPost = post => {
+    console.log(`view ${post.title}`);
+    this.setState({
+      post: post
+    });
+  };
+
   render() {
-    let { user, posts } = this.state;
+    let { user, posts, post } = this.state;
     const authProps = {
       authenticateUser: this.authenticateUser
     };
@@ -112,24 +120,20 @@ class App extends React.Component {
             </ul>
           </header>
           <main>
-            <Route exact path="/">
-              {user ? (
-                <React.Fragment>
-                  <div>Hello {user}!</div>
-                  <div>
-                    {posts.map(post => (
-                      <div key={post._id}>
-                        <h1>{post.title}</h1>
-                        <p>{post.body}</p>
-                      </div>
-                    ))}
-                  </div>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>Please Register or login</React.Fragment>
-              )}
-            </Route>
             <Switch>
+              <Route exact path="/">
+                {user ? (
+                  <React.Fragment>
+                    <div>Hello {user}!</div>
+                    <PostList posts={posts} clickPost={this.viewPost} />
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>Please Register or login</React.Fragment>
+                )}
+              </Route>
+              <Route path="/posts/:postId">
+                <Post post={post} />
+              </Route>
               <Route
                 exact
                 path="/register"
